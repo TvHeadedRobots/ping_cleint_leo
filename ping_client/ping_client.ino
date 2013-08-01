@@ -34,8 +34,8 @@ void setup(){
    * Mirf.cePin = 7;
    */
 
-  Mirf.cePin = 7;
-  Mirf.csnPin = 8;
+  Mirf.cePin = 8;
+  Mirf.csnPin = 7;
 
   Mirf.spi = &MirfHardwareSpi;
   Mirf.init();
@@ -74,9 +74,11 @@ void setup(){
 
 void loop(){
   unsigned long time = millis();
+  unsigned long data = 123456; 
   
   Mirf.setTADDR((byte *)"serv1");
   
+  //Mirf.send((byte *)&data);
   Mirf.send((byte *)&time);
   
   while(Mirf.isSending()){
@@ -92,13 +94,15 @@ void loop(){
     }
   }
   
+  Mirf.getData((byte *) &data);
   Mirf.getData((byte *) &time);
-  
+  //Serial.print("data: ");
+  //Serial.println(data);
   Serial.print("Ping: ");
   Serial.println((millis() - time));
   
   delay(1000);
-} 
+}
   
   
   
