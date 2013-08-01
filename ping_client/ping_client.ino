@@ -21,6 +21,10 @@
 #include <nRF24L01.h>
 #include <MirfHardwareSpiDriver.h>
 
+// Read and print RF_SETUP 
+byte rf_setup = 0;
+byte reg_val = 0;
+byte reg_wr = 01;
 void setup(){
   Serial.begin(9600);
   delay(5000);
@@ -68,6 +72,13 @@ void setup(){
    */
    
   Mirf.config();
+  
+  Mirf.readRegister( RF_SETUP, &rf_setup, sizeof(rf_setup) );
+  Mirf.readRegister( RF_PWR, &reg_val, sizeof(reg_val) );
+  Serial.print( "rf_setup = " );
+  Serial.println( rf_setup, BIN );
+  Serial.print("Register Value: ");
+  Serial.println(reg_val, BIN);  
   
   Serial.println("Beginning ... "); 
 }
