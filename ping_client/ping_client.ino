@@ -85,12 +85,12 @@ void setup(){
 
 void loop(){
   unsigned long time = millis();
-  unsigned long data = 123456; 
+  unsigned long data = 2; 
   
   Mirf.setTADDR((byte *)"serv1");
   
-  //Mirf.send((byte *)&data);
-  Mirf.send((byte *)&time);
+  Mirf.send((byte *)&data);
+  //Mirf.send((byte *)&time);
   
   while(Mirf.isSending()){
   }
@@ -107,10 +107,10 @@ void loop(){
   
   Mirf.getData((byte *) &data);
   Mirf.getData((byte *) &time);
-  //Serial.print("data: ");
-  //Serial.println(data);
-  Serial.print("Ping: ");
-  Serial.println((millis() - time));
+  Serial.print("data: ");
+  Serial.println(data);
+  //Serial.print("Ping: ");
+  //Serial.println((millis() - time));
   
   delay(1000);
 }
